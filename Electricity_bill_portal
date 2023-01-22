@@ -1,0 +1,132 @@
+# Electricity bill portal..
+
+import random
+import datetime
+
+print("Welcome to electricity bill portal")
+
+consumer_number = int(input("please enter consumer number: "))
+Account_holder_name = "MR. Python"
+if consumer_number == 12345:
+  print("Account holder name:", Account_holder_name)
+
+  Bill_number = random.randint(123456,514484)
+  Bill_date = datetime.date.today()
+  #print(Bill_date)
+  # Bill_amount before due date
+  Unit_utilised = int(input("please enter unit reading:"))
+
+
+  if Unit_utilised > 50 and Unit_utilised < 100:
+    rate = 8
+    Bill_amount = Unit_utilised * rate
+  elif Unit_utilised >100 and Unit_utilised < 200:
+    rate = 10
+    Bill_amount = Unit_utilised * rate
+  else:
+    rate = 12
+    Bill_amount = Unit_utilised * rate
+
+  # Electricity bill calculation
+  fine = Bill_amount * 0.1
+  Bill_amount1 = (Unit_utilised * rate) + fine
+
+  # Bill_amount after due date
+  Due_date =  Bill_date + datetime.timedelta(days=15)
+  #print(Due_date)
+
+
+  if consumer_number == 12345:
+    print("your Bill number :", Bill_number)
+    print("your Bill date :", Bill_date)
+    print("your bill due date: ", Due_date)
+    print("your Bill_amount before due date :", Bill_amount)
+    print("your Bill_amount after due date :", Bill_amount1)
+
+    print("""Do you want to pay online?
+    please choose following transaction mode
+    1. UPI
+    2. Debit card
+    3. Credit card
+    4. Net banking
+    5. Pay later
+    """)
+
+    choice = int(input("please choose option:"))
+    Balance = 10000
+    Pin = 1234
+
+    if choice == 1:
+      print("you have selected UPI mode")
+      UPI_ID = input("please enter your UPI id:")
+        # upi validation
+      if UPI_ID.endswith("@upi") == True:
+        Pin = int(input("please enter UPI pin:"))
+        if Pin == 1234:
+          if Balance > Bill_amount1:
+            print("Transaction done!!")
+            print("You paid the electicity bill... Thank you!!")
+          else:
+            print("insufficient balance")
+        else:
+            print("Please enter valid Pin and try again!")
+      else:
+        print("please enter correct UPI id and try again later")
+
+    elif choice == 2:
+      print("you have selected Debit card mode")
+      Debitcard = input("please enter your Debit card number:")
+      CNN = input("please enter CNN number")
+      
+        # debit card validation
+      if len(Debitcard) == 12:
+        if len(CNN) == 3:
+          Pin = int(input("please enter pin:"))
+          if Pin == 1234:
+            if Balance > Bill_amount1:
+              print("Transaction done!!")
+              print("You paid the electicity bill... Thank you!!")
+            else:
+              print("insufficient balance")
+          else:
+            print("Please enter valid Pin and try again!")
+        else:
+          print("please enter valid CNN number")
+      else:
+        print("Please enter valid debit card number")
+
+    elif choice == 3:
+      print("you have selected Credit card mode")
+      Creditcard = input("please enter your Credit card number:")
+      # credit card validation
+      if len(Creditcard) == 12:
+        Pin = int(input("please enter pin:"))
+        if Pin == 1234:
+          if Balance > Bill_amount1:
+            print("Transaction done!!")
+            print("You paid the electicity bill... Thank you!!")
+          else:
+            print("insufficient balance")
+        else:
+            print("Please enter valid Pin and try again!")
+      else:
+        print("Please enter valid credit card number")
+
+    elif choice == 4:
+      print("you have selected Debit card mode")
+      Netbanking = input("please enter your netbanking number:")
+      Pin = input("please enter pin:")
+      if Balance > Bill_amount1:
+        print("Transaction done!!")
+      else:
+        print("insufficient balance")
+
+    elif choice == 5:
+      print("you have selected pay later option")
+
+    else:
+      print("please enter right choice")
+
+else:
+  print("please enter valid consumer number and try again..!")
+  print("Thank you.!")
